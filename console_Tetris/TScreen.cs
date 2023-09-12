@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 
 class TETRISSCREEN
 {
+ 
     List<List<string>> BlockList = new List<List<string>>();//2차원 리스트를 구현
 
 

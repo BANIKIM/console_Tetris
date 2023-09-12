@@ -5,6 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 
+enum BLOCKDIR// 회전했을 때 모양
+{    
+    BD_T,
+    BD_R,
+    BD_B,
+    BD_L,
+    BD_MAX
+}
+
 enum BLOCKTYPE
 {
     BT_I,// 한줄블럭
@@ -13,33 +22,37 @@ enum BLOCKTYPE
     BT_Z, // 왼쪽 N
     BT_S, // 오른쪽 N
     BT_T, // T자 블럭
-    BT_O // ㅁ자 블럭
+    BT_O, // ㅁ자 블럭
+    BT_MAX,
 }
 
 // 4 X 4의 배열 같은게 필요함
 
 
-class Block
+partial class Block
 {
     int X =0;
     int Y =0;
-    List<List<string>> BlockData = new List<List<string>>();
+   /* BLOCKDIR Dir = BLOCKDIR.BD_T;*/
+    string[][] Arr = null;
+   // List<List<string>> BlockData = new List<List<string>>();
 
     TETRISSCREEN Screen = null;
 
     public Block(TETRISSCREEN _Screen)
     {
         Screen = _Screen;
-        
-        for(int y=0; y<4 ; ++y)
-        {
-            BlockData.Add(new List<string>());
-          
-        }
+        Datalnit();
 
+        SettingBlock(BLOCKTYPE.BT_T, BLOCKDIR.BD_R);
         
 
     }
+    private void SettingBlock(BLOCKTYPE _Type, BLOCKDIR _Dir)
+    {
+        Arr = AllBlock[(int)_Type][(int)_Dir];
+    }
+
 
     private void Input()
     {
@@ -70,7 +83,19 @@ class Block
         //내가 어떤 키든 눌렀을때만 input을 실행 
    
         Input();
-        Screen.SetBlock(Y, X, "▣");
+        
+        for(int y=0; y<4; ++y)
+        {
+            for(int x=0; x<4; ++x)
+            {
+                if (Arr[y][x] =="□")
+                {
+                    continue;
+                }
+                Screen.SetBlock(Y+y, X+x, Arr[y][x]);
+
+            }
+        }
        
        
 
