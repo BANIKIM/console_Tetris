@@ -41,18 +41,22 @@ namespace console_Tetris
     {
         static void Main(string[] args)
         {
-            TETRISSCREEN NewSC = new TETRISSCREEN(10, 15);
-
-            Block NewBlock = new Block(NewSC);
+            
+            TETRISSCREEN NewSC = new TETRISSCREEN(10, 15, true);
+            ACCSCREEN NewASC = new ACCSCREEN(NewSC);
+            Block NewBlock = new Block(NewSC, NewASC);
             
             while (true)
             {
                 Thread.Sleep(100);
                 Console.Clear();
-                NewBlock.Move();
+                
                 NewSC.Render();
                 NewSC.Clear();
-           
+                NewASC.Render();
+                NewASC.DestroyCheck();
+                NewBlock.Move();
+
             }
 
         }

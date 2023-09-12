@@ -9,13 +9,34 @@ using System.Threading.Tasks;
 
 class TETRISSCREEN
 {
- 
-    List<List<string>> BlockList = new List<List<string>>();//2차원 리스트를 구현
 
+   protected List<List<string>> BlockList = new List<List<string>>();//2차원 리스트를 구현
+
+
+    public int Y
+    {
+        get
+        {
+            return BlockList.Count;
+        }
+    }
+
+    public int X
+    {
+        get
+        {
+           return BlockList[0].Count;
+        }
+    }
 
     public void SetBlock(int _y, int _x, string _Type)
     {
         BlockList[_y][_x] = _Type;
+    }
+
+    public bool IsBlock(int _y, int _x, string _Type)
+    {
+        return BlockList[_y][_x] == _Type;
     }
 
     public void Clear()
@@ -35,7 +56,7 @@ class TETRISSCREEN
             
     }
 
-    public void Render()
+    public virtual void Render()
     {
         for (int y = 0; y < BlockList.Count; ++y)
         {
@@ -51,7 +72,7 @@ class TETRISSCREEN
         }
     }
 
-    public TETRISSCREEN(int _X, int _Y)
+    public TETRISSCREEN(int _X, int _Y, bool TopAndBotLine)
     { 
         for (int y = 0; y < _Y; ++y)
         {
@@ -61,8 +82,13 @@ class TETRISSCREEN
                 BlockList[y].Add("□");
 
             }
-
         }
+
+        if(false == TopAndBotLine)
+        {
+            return;
+        }
+
         for (int i = 0; i < BlockList[0].Count; i++)
         {
             BlockList[0][i] = "■";
