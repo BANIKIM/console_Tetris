@@ -137,7 +137,7 @@ partial class Block
 
     private void Input()
     {
-        Y += 1;
+        //Y += 1;
         if (false == Console.KeyAvailable)
         {
             return; 
