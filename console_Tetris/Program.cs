@@ -45,7 +45,10 @@ namespace console_Tetris
             TETRISSCREEN NewSC = new TETRISSCREEN(10, 15, true);
             ACCSCREEN NewASC = new ACCSCREEN(NewSC);
             Block NewBlock = new Block(NewSC, NewASC);
-            
+            Tite T = new Tite();
+
+            T.t();
+            Console.ReadKey();
             while (true)
             {
                 Thread.Sleep(100);

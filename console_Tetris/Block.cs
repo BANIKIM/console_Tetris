@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 
 enum BLOCKDIR// 회전했을 때 모양
@@ -137,7 +138,14 @@ partial class Block
 
     private void Input()
     {
-        //Y += 1;
+        
+        if(false == DownCheck())
+        {
+            Thread.Sleep(500);
+            Y += 1;
+        }
+        
+        
         if (false == Console.KeyAvailable)
         {
             return; 
